@@ -2,10 +2,19 @@
 
 pm2 start "node onout.js"
 
- */
+*/
+//load GHKEY from .env
+
+console.log(process.argv[2])
+if (!process.argv[2]) {
+  return console.log('GHKEY not found');
+}
+
 const express = require('express');
 const dotenv = require('dotenv');
+
 dotenv.config();
+//load env
 
 const { body, validationResult } = require('express-validator');
 const fs = require('fs');
@@ -25,6 +34,8 @@ function esc_attr(str) {
   return htmlEncode(str);
 }
 app.get('/', (req, res) => {
+  console.log('get /');
+  console.log(process.argv[2]);
   res.send(`<meta name="viewport" content="width=device-width, initial-scale=1">
     <form method="post"  action="/submit-form">
 	Main text <br>
@@ -59,12 +70,12 @@ app.post(
     console.log('nm:' + nm);
 
     exec(
-      `rm -rf /root/chate && cd /root/ && git clone https://github.com/marsiandeployer/${reponame} && cd chate && git checkout -b ${nm}`,
+      `git checkout -b ${nm}`,
       (error, stdout, stderr) => {
         if (error) {
-          console.error(`exec clone ${error}`);
+          console.error(`git checkout -b err: ${error}`);
           return res.status(400).json({
-            error: `Failed to clone. ${error}`,
+            error: `Failed to checkout. ${error}`,
           });
         }
 
@@ -143,12 +154,10 @@ sfd
 
         //load ghkey from .env
 
-        const ghkey = process.env.GHKEY;
-        console.log('load GHKEY from  .env');
-        console.log(ghkey);
+
 
         exec(
-          `cd /root/${reponame} && git add . && git commit -m "replace chat welcome screen" && git push https://${ghkey}@github.com/marsiandeployer/${reponame}.git`,
+          `git add . && git commit -m "replace chat welcome screen" && git push https://${process.argv[2]}@github.com/marsiandeployer/${reponame}.git && git checkout main`,
           (error, stdout, stderr) => {
             if (error) {
               console.error(`84: ${error}`);
