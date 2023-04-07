@@ -10,6 +10,14 @@ if (!process.argv[2]) {
   return console.log('GHKEY not found');
 }
 
+*/
+//load GHKEY from .env
+
+console.log(process.argv[2])
+if (!process.argv[2]) {
+  return console.log('GHKEY not found');
+}
+
 const express = require('express');
 const dotenv = require('dotenv');
 
