@@ -2,10 +2,19 @@
 
 pm2 start "node onout.js"
 
- */
+*/
+//load GHKEY from .env
+
+console.log(process.argv[2])
+if (!process.argv[2]) {
+  return console.log('GHKEY not found');
+}
+
 const express = require('express');
 const dotenv = require('dotenv');
+
 dotenv.config();
+//load env
 
 const { body, validationResult } = require('express-validator');
 const fs = require('fs');
@@ -25,6 +34,8 @@ function esc_attr(str) {
   return htmlEncode(str);
 }
 app.get('/', (req, res) => {
+  console.log('get /');
+  console.log(process.argv[2]);
   res.send(`<meta name="viewport" content="width=device-width, initial-scale=1">
     <form method="post"  action="/submit-form">
 	Main text <br>
@@ -59,69 +70,24 @@ app.post(
     console.log('nm:' + nm);
 
     exec(
-      `rm -rf /root/chate && cd /root/ && git clone https://github.com/marsiandeployer/${reponame} && cd chate && git checkout -b ${nm}`,
+      `git checkout -b ${nm}`,
       (error, stdout, stderr) => {
         if (error) {
-          console.error(`exec clone ${error}`);
+          console.error(`git checkout -b err: ${error}`);
           return res.status(400).json({
-            error: `Failed to clone. ${error}`,
+            error: `Failed to checkout. ${error}`,
           });
         }
 
-        const regex = new RegExp(
-          `<div className="text-center text-gray-500 dark:text-gray-400">
-<div className="mb-2">
-  (.*?)
-  (.*?)
-</div>
-<div className="mb-2">
-  (.*?)
-  (.*?)\\.
-</div>
-<div className="mb-2">
-  {t\\(
-    '(.*?)',
-  \\)}
-</div>
-<div>
-  {t\\(
-    "(.*?)",
-  \\)}
-  <a
-    href="(.*?)"
-    target="_blank"
-    rel="noreferrer"
-    className="text-blue-500 hover:underline"
-  >
-    (.*?)
-  </a>
-</div>
-</div>`,
-          '',
-        );
+        
+        const regex = new RegExp(`<div className="text-center text-4xl font-bold text-black dark:text-white">
+              (.*?)
+            </div>`, 'gm')
+         
 
-        const str_new = `<div className="text-center text-gray-500 dark:text-gray-400">
-<div className="mb-2">
-${main_text}
-</div>
-<div className="mb-2">
-sdf
-</div>
-<div className="mb-2">
-sdf
-</div>
-<div>
-sfd
-<a
-  href=""
-  target="_blank"
-  rel="noreferrer"
-  className="text-blue-500 hover:underline"
->
-  sdfsdfsdf
-</a>
-</div>
-</div>`;
+        const str_new = `<div className="text-center text-4xl font-bold text-black dark:text-white">
+        ${main_text}
+      </div>`;
 
         let filenam = 'components/Chat/Chat.tsx';
         fs.readFile(filenam, 'utf8', function (err, data) {
@@ -129,10 +95,19 @@ sfd
             console.error(err);
             return;
           }
+          
+          //test regex is working
+          const matches = data.match(regex);
+          console.log(matches);
+          if (!matches) {
+            return res.status(400).json({
+              error: 'Failed to find regex, please contact us (error onout.js missing regex)',
+            });
+          }
 
           const updatedData = data.replace(regex, str_new); //это строка для замены прямо в файле
 
-          fs.writeFile(`${filenam}_`, updatedData, 'utf8', function (err) {
+          fs.writeFile(`${filenam}`, updatedData, 'utf8', function (err) {
             if (err) {
               console.error(err);
               return;
@@ -143,12 +118,10 @@ sfd
 
         //load ghkey from .env
 
-        const ghkey = process.env.GHKEY;
-        console.log('load GHKEY from  .env');
-        console.log(ghkey);
 
+        
         exec(
-          `cd /root/${reponame} && git add . && git commit -m "replace chat welcome screen" && git push https://${ghkey}@github.com/marsiandeployer/${reponame}.git`,
+          `git add . && git commit -m "replace chat welcome screen" && git push https://${process.argv[2]}@github.com/marsiandeployer/${reponame}.git && git checkout main`,
           (error, stdout, stderr) => {
             if (error) {
               console.error(`84: ${error}`);
@@ -161,7 +134,7 @@ sfd
               `Success. Your app will be availabe at https://chate-git-${nm}-marsiandeployer.vercel.app/ in few minutes. Enjoy :) Plesae note if you send form again domain will be changed`,
             );
           },
-        );
+        ); 
       },
     );
   },
