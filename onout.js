@@ -1,6 +1,7 @@
 /*
-
+git commit main
 node onout.js ghp_FsX...qn (github user key)
+DO NOT RUN NOT FROM "main" branch OR WITHOUT COMMIT BEFORE RUN (git can delete your changes)
 */
 
 const PORT = 3020
@@ -118,7 +119,7 @@ app.post(
           <div className="mb-2">
             
           </div>
-          <div style="font-size:130%">
+          <div>
             ${link}
           </div>
         </div>`;
