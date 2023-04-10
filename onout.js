@@ -103,7 +103,7 @@ app.post(
             link = "<a href='"+esc_attr(req.body.link)+"'>"+req.body.linkText+"</a>";
           }
           h1text = esc_attr(req.body.h1text);
-          description = esc_attr(req.body.description);
+          let description = esc_attr(req.body.main_text);
           const str_new = `<div className="text-center text-4xl font-bold text-black dark:text-white">
           ${h1text}
         </div>
