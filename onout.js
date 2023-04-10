@@ -263,7 +263,7 @@ app.get('/', (req, res) => {
     </div>
     <div class="col-6"><bR><br><br>
     <img src='https://onout.org/Chate/mainimage.png' width=100%>
-    </div>
+    </div><Br>
     <a href="https://t.me/onoutsupportbot" target=_blank>Support</a>
     </div>
     </div>
