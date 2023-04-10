@@ -20,6 +20,7 @@ const fs = require('fs');
 const request = require('request');
 
 const { htmlEncode } = require('js-htmlencode');
+const { IconLetterB } = require('@tabler/icons-react');
 
 const app = express();
 app.use(
@@ -106,7 +107,9 @@ app.post(
 
           //if request.body.link is not empty
           if (req.body.link) {
-            link = "<a href='" + esc_attr(req.body.link) + "'>" + req.body.linkText + "</a>";
+            link = `<a href="${esc_attr(req.body.link)}" target="_blank"
+            rel="noreferrer"
+            className="text-blue-500 hover:underline">${esc_attr(req.body.linkText)}</a>`;
           }
           h1text = esc_attr(req.body.h1text);
           let description = esc_attr(req.body.main_text);
@@ -168,22 +171,24 @@ app.post(
                   
                   
                     <div class="container col-5">
-
+                    <Br>  <bR><br><br>
                     <div class="alert alert-success" role="alert">
                 Success. Your app will be availabe at https://chate-git-${nm}-marsiandeployer.vercel.app/ in few minutes. Enjoy :) Plesae note if you send form again domain will be changed . 
                 <br><Br><br>
                 Widget HTML code to embed on your site:
                 
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">
-<!-- iframe with 100% height -->
-<iframe style='border:0' src="https://chate-git-${nm}-marsiandeployer.vercel.app/" class='' id="onoutiframe" width="100%" height="100%"></iframe>
-<!-- fix 100% onoutiframe iframe height on pure js -->
-<script>
-var iframe = document.getElementById('onoutiframe');
-iframe.onload = function() {
-iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
-};
-</script>
+                <!-- iframe with 100% height -->
+                <iframe style='border:0;min-width:400px;min-height:800px' src="https://chate-git-i391032023-marsiandeployer.vercel.app/" class='' id="onoutiframe" width="100%" height="100%"></iframe>
+                <!-- fix 100% onoutiframe iframe height on pure js -->
+                <script>
+                var iframe = document.getElementById('onoutiframe');
+                iframe.onload = function() {
+                iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+                };
+                </script>
+                
+                
                 </textarea>
                 </div>
                 </div>
