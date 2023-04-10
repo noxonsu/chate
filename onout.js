@@ -178,18 +178,15 @@ app.post(
                 Widget HTML code to embed on your site:
                 
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">
-                <!-- iframe with 100% height -->
-                <iframe style='border:0;min-width:400px;min-height:800px' src="https://chate-git-i391032023-marsiandeployer.vercel.app/" class='' id="onoutiframe" width="100%" height="100%"></iframe>
-                <!-- fix 100% onoutiframe iframe height on pure js -->
-                <script>
-                var iframe = document.getElementById('onoutiframe');
-                iframe.onload = function() {
-                iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
-                };
-                </script>
-                
-                
-                </textarea>
+<!-- iframe with 100% height -->
+<iframe style='border:0;min-width:400px;min-height:800px' src="https://chate-git-i391032023-marsiandeployer.vercel.app/" class='' id="onoutiframe" width="100%" height="100%"></iframe>
+<!-- fix 100% onoutiframe iframe height on pure js -->
+<script>
+var iframe = document.getElementById('onoutiframe');
+iframe.onload = function() {
+iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+};
+</script></textarea>
                 </div>
                 </div>
                 </body>
