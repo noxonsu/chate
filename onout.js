@@ -58,73 +58,6 @@ const regex = new RegExp(`<div className="text-center text-4xl font-bold text-bl
 
 
 
-
-
-
-
-
-app.get('/', (req, res) => {
-  console.log('get /');
-  console.log(process.argv[2]);
-  fs.readFile(filenam, 'utf8', function (err, data) {
-    if (err) {
-      console.error(err);
-      return;
-    }
-    //test regex is working
-    const matches = data.match(regex);
-    console.log(matches);
-    if (!matches) {
-      return res.status(400).json({
-        error: 'Failed to find regex, please contact us (error onout.js missing regex)',
-      });
-    }
-  });
-
-  //lorem ipsum for test purposes only
-  res.send(`
-  <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>deploy</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-  
-	
-		<div class="container col-5">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-    <form method="post"  action="/submit-form">
-    Main title:<Br>
-    <input type='text' name='open_ai_key' placeholder='Welcome!' value='Your welcome message'><Br>
-
-	    Main text <br>
-      <textarea style='width:500px;height:300px' required name='main_text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</textarea>
-      <br>
-      OPEN_AI_KEY (leave empty if you plan to sell it externally):<Br>
-      <input type='text' name='open_ai_key' value=''><Br>
-      <Br>Link (leave empty if you plan to sell it externally):<Br>
-      <input type='text' name='link' placeholder='https://www.buymeacoffee.com/onoutorg/e/127423' value=''><Br>
-      <Br>
-      Text for link
-      <input type='text' name='linkText' placeholder='Get API key here' value=''><Br>
-      <Br>
-      <input type='submit' value='deploy test' style='size:30px'>
-	  <input type='button' onclick='alert("contact us")' value='deploy to my domain' style='size:30px'>
-    </form>
-
-    </div>
-    <div class="container col-5">
-    <img src=''>
-    </div>
-  </body>
-</html>
-  `);
-});
-
 app.post(
   '/submit-form',
   [body('main_text').notEmpty().withMessage('Please specify main text')],
@@ -169,7 +102,8 @@ app.post(
           if (req.body.link) {
             link = "<a href='"+esc_attr(req.body.link)+"'>"+req.body.linkText+"</a>";
           }
-
+          h1text = esc_attr(req.body.h1text);
+          
           const str_new = `<div className="text-center text-4xl font-bold text-black dark:text-white">
           ${h1text}
         </div>
@@ -223,6 +157,70 @@ app.post(
     );
   },
 );
+
+
+app.get('/', (req, res) => {
+  console.log('get /');
+  console.log(process.argv[2]);
+  fs.readFile(filenam, 'utf8', function (err, data) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    //test regex is working
+    const matches = data.match(regex);
+    console.log(matches);
+    if (!matches) {
+      return res.status(400).json({
+        error: 'Failed to find regex, please contact us (error onout.js missing regex)',
+      });
+    }
+  });
+
+  //lorem ipsum for test purposes only
+  res.send(`
+  <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>deploy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+  
+	
+		<div class="container col-5">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <form method="post"  action="/submit-form"><br><br>
+    Main title:<Br>
+    <input type='text' name='h1text' placeholder='Welcome!' value='Your welcome message'><Br>
+
+	    Main text <br>
+      <textarea style='width:500px;height:300px' required name='main_text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</textarea>
+      <br>
+      OPEN_AI_KEY (leave empty if you plan to sell it externally):<Br>
+      <input type='text' name='open_ai_key' value=''><Br>
+      <Br>Link (leave empty if you plan to sell it externally):<Br>
+      <input type='text' name='link' placeholder='https://www.buymeacoffee.com/onoutorg/e/127423' value='https://www.buymeacoffee.com/onoutorg/e/127423'><Br>
+      <Br>
+      Text for link<Br>
+      <input type='text' name='linkText' placeholder='Get API key here' value=''><Br>
+      <Br>
+      <input type='submit' value='deploy test' style='size:30px'>
+	  <input type='button' onclick='alert("contact us")' value='deploy to my domain' style='size:30px'>
+    </form>
+
+    </div>
+    <div class="container col-5">
+    <img src=''>
+    </div>
+  </body>
+</html>
+  `);
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
