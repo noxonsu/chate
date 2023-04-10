@@ -237,7 +237,7 @@ app.get('/', (req, res) => {
   <body>
   
 	
-		<div class="container col-5">
+		<div class="container col-7">
     <div class=row>
     <div class="col-6">
     <form method="post"  action="/submit-form"><br><br>
@@ -261,8 +261,8 @@ app.get('/', (req, res) => {
     </form>
     
     </div>
-    <div class="col-6">
-    <img src='https://onout.org/Chate/mainimage.png' width=400>
+    <div class="col-6"><bR><br><br>
+    <img src='https://onout.org/Chate/mainimage.png' width=100%>
     </div>
     <a href="https://t.me/onoutsupportbot" target=_blank>Support</a>
     </div>
