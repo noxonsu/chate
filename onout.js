@@ -165,7 +165,8 @@ app.post(
           }
           let link = '';
 
-          if (request.body.link) {
+          //if request.body.link is not empty
+          if (req.body.link) {
             link = "<a href='"+esc_attr(request.body.link)+"'>"+request.body.linkText+"</a>";
           }
 
