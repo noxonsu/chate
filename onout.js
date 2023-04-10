@@ -248,7 +248,7 @@ app.get('/', (req, res) => {
       OPEN_AI_KEY (leave empty if you plan to sell it externally):<Br>
       <input type='text' name='open_ai_key' value=''><Br>
       -->
-      <Br>Link (leave empty if you plan to sell it externally):<Br>
+      <Br>Link where user can get access code:<Br>
       <input type='text' name='link' placeholder='https://www.buymeacoffee.com/onoutorg/e/127423' value='https://www.buymeacoffee.com/onoutorg/e/127423'><Br>
       <Br>
       Text for link<Br>
