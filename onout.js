@@ -149,7 +149,50 @@ app.post(
             }
             console.log(stdout);
             res.send(
-              `Success. Your app will be availabe at https://chate-git-${nm}-marsiandeployer.vercel.app/ in few minutes. Enjoy :) Plesae note if you send form again domain will be changed`,
+              `<!doctype html>
+              <html lang="en">
+                <head>
+                  <meta charset="utf-8">
+                  <meta name="viewport" content="width=device-width, initial-scale=1">
+                  <title>deploy</title>
+                  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+                  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+                  <link rel="stylesheet" href="styles.css">
+                </head>
+                <body>
+                <div class="container">
+                <div class="row">
+                <div class="col-12">
+                <div class="alert alert-success" role="alert">
+                Success. Your app will be availabe at https://chate-git-${nm}-marsiandeployer.vercel.app/ in few minutes. Enjoy :) Plesae note if you send form again domain will be changed. 
+
+                WHTML widget code to embed:
+                <pre>
+                <code>
+                <!-- onout.org iframe with 100% height -->
+                <iframe style='border:0' src="https://chate-git-${nm}-marsiandeployer.vercel.app/" class='' id="onoutiframe" width="100%" height="100%"></iframe>
+                <!-- fix 100% onoutiframe iframe height on pure js -->
+                <script>
+                    var iframe = document.getElementById('onoutiframe');
+                    iframe.onload = function() {
+                        iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+                    };
+                </script>
+                </code>
+                </pre>
+                <script>
+                document.addEventListener('DOMContentLoaded', (event) => {
+                  document.querySelectorAll('pre code').forEach((el) => {
+                    hljs.highlightElement(el);
+                  });
+                });</script>
+                </div>
+                </div>
+                </div>
+                </body>
+                </html>`,
             );
           },
         );
