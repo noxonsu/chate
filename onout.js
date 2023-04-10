@@ -163,6 +163,8 @@ app.post(
                   
                   
                     <div class="container col-5">
+
+                    <div class="alert alert-success" role="alert">
                 Success. Your app will be availabe at https://chate-git-${nm}-marsiandeployer.vercel.app/ in few minutes. Enjoy :) Plesae note if you send form again domain will be changed . 
                 <br><Br><br>
                 Widget HTML code to embed on your site:
@@ -178,7 +180,7 @@ iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
 };
 </script>
                 </textarea>
-
+                </div>
                 </div>
                 </body>
                 </html>
