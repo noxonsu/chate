@@ -92,6 +92,11 @@ app.post(
 
         console.log(stdout);
 
+        if (req.body.open_ai_key) {
+          //open_ai_key key is provided by admin
+          
+        }
+        
         fs.readFile(filenam, 'utf8', function (err, data) {
           if (err) {
             console.error(err);
@@ -213,7 +218,11 @@ app.get('/', (req, res) => {
     }
   });
 
-  //lorem ipsum for test purposes only
+
+
+
+
+  
   res.send(`
   <!doctype html>
 <html lang="en">
@@ -235,9 +244,10 @@ app.get('/', (req, res) => {
 
 	    Main text <br>
       <textarea style='width:500px;height:300px' required name='main_text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</textarea>
-      <br>
+      <!-- <br>
       OPEN_AI_KEY (leave empty if you plan to sell it externally):<Br>
       <input type='text' name='open_ai_key' value=''><Br>
+      -->
       <Br>Link (leave empty if you plan to sell it externally):<Br>
       <input type='text' name='link' placeholder='https://www.buymeacoffee.com/onoutorg/e/127423' value='https://www.buymeacoffee.com/onoutorg/e/127423'><Br>
       <Br>
