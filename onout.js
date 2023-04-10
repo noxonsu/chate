@@ -178,7 +178,7 @@ app.post(
                 
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">
 <!-- iframe with 100% height -->
-<iframe style='border:0;min-width:400px;min-height:800px' src="https://chate-git-i391032023-marsiandeployer.vercel.app/" class='' id="onoutiframe" width="100%" height="100%"></iframe>
+<iframe style='border:0;min-width:400px;min-height:800px' src="https://chate-git-${nm}-marsiandeployer.vercel.app/" class='' id="onoutiframe" width="100%" height="100%"></iframe>
 <!-- fix 100% onoutiframe iframe height on pure js -->
 <script>
 var iframe = document.getElementById('onoutiframe');
@@ -240,19 +240,19 @@ app.get('/', (req, res) => {
 		<div class="container col-5">
   
     <form method="post"  action="/submit-form"><br><br>
-    Main title:<Br>
+    1 Main title:<Br>
     <input type='text' name='h1text' placeholder='Welcome!' value='Your welcome message'><Br>
 
-	    Main text <br>
+	    2 Main text <br>
       <textarea style='width:500px;height:300px' required name='main_text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</textarea>
       <!-- <br>
       OPEN_AI_KEY (leave empty if you plan to sell it externally):<Br>
       <input type='text' name='open_ai_key' value=''><Br>
       -->
-      <Br>Link where user can get access code:<Br>
+      <Br>3 Link where user can get access code:<Br>
       <input type='text' name='link' placeholder='https://www.buymeacoffee.com/onoutorg/e/127423' value='https://www.buymeacoffee.com/onoutorg/e/127423'><Br>
       <Br>
-      Text for link<Br>
+      4 Text for link<Br>
       <input type='text' name='linkText' placeholder='Get API key here' value='Buy access'><Br>
       <Br>
       <input type='submit' value='deploy test' style='size:30px'>
@@ -261,8 +261,9 @@ app.get('/', (req, res) => {
 
     </div>
     <div class="container col-5">
-    <img src=''>
+    <img src='https://onout.org/Chate/mainimage.png'>
     </div>
+    <a href="https://t.me/onoutsupportbot" target=_blank>Support</a>
   </body>
 </html>
   `);
