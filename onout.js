@@ -206,7 +206,7 @@ app.get('/', (req, res) => {
       <input type='text' name='link' placeholder='https://www.buymeacoffee.com/onoutorg/e/127423' value='https://www.buymeacoffee.com/onoutorg/e/127423'><Br>
       <Br>
       Text for link<Br>
-      <input type='text' name='linkText' placeholder='Get API key here' value=''><Br>
+      <input type='text' name='linkText' placeholder='Get API key here' value='Buy access'><Br>
       <Br>
       <input type='submit' value='deploy test' style='size:30px'>
 	  <input type='button' onclick='alert("contact us")' value='deploy to my domain' style='size:30px'>
