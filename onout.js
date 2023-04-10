@@ -255,13 +255,13 @@ app.get('/', (req, res) => {
       4 Text for link<Br>
       <input type='text' name='linkText' placeholder='Get API key here' value='Buy access'><Br>
       <Br>
-      <input type='submit' value='deploy test' style='size:30px'>
-	  <input type='button' onclick='alert("contact us")' value='deploy to my domain' style='size:30px'>
+      <input type='submit' class='btn btn-primary' value='deploy test' style='size:30px'>
+	  <input type='button' class='btn' onclick='alert("contact us")' value='deploy to my domain' style='size:30px'>
     </form>
 
     </div>
-    <div class="container col-5">
-    <img src='https://onout.org/Chate/mainimage.png'>
+    <div class="container col-5 col-md-5">
+    <img src='https://onout.org/Chate/mainimage.png' width=400>
     </div>
     <a href="https://t.me/onoutsupportbot" target=_blank>Support</a>
   </body>
