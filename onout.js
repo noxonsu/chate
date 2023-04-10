@@ -167,7 +167,7 @@ app.post(
 
           //if request.body.link is not empty
           if (req.body.link) {
-            link = "<a href='"+esc_attr(request.body.link)+"'>"+request.body.linkText+"</a>";
+            link = "<a href='"+esc_attr(req.body.link)+"'>"+req.body.linkText+"</a>";
           }
 
           const str_new = `<div className="text-center text-4xl font-bold text-black dark:text-white">
