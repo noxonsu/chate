@@ -95,9 +95,9 @@ app.post(
 
         if (req.body.open_ai_key) {
           //open_ai_key key is provided by admin
-          
+
         }
-        
+
         fs.readFile(filenam, 'utf8', function (err, data) {
           if (err) {
             console.error(err);
@@ -223,7 +223,7 @@ app.get('/', (req, res) => {
 
 
 
-  
+
   res.send(`
   <!doctype html>
 <html lang="en">
@@ -238,7 +238,8 @@ app.get('/', (req, res) => {
   
 	
 		<div class="container col-5">
-  
+    <div class=row>
+    <div class="col-6">
     <form method="post"  action="/submit-form"><br><br>
     1 Main title:<Br>
     <input type='text' name='h1text' placeholder='Welcome!' value='Your welcome message'><Br>
@@ -258,12 +259,14 @@ app.get('/', (req, res) => {
       <input type='submit' class='btn btn-primary' value='deploy test' style='size:30px'>
 	  <input type='button' class='btn' onclick='alert("contact us")' value='deploy to my domain' style='size:30px'>
     </form>
-
+    
     </div>
-    <div class="container col-5 col-md-5">
+    <div class="col-6">
     <img src='https://onout.org/Chate/mainimage.png' width=400>
     </div>
     <a href="https://t.me/onoutsupportbot" target=_blank>Support</a>
+    </div>
+    </div>
   </body>
 </html>
   `);
