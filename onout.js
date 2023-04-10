@@ -107,8 +107,7 @@ app.post(
 
           //if request.body.link is not empty
           if (req.body.link) {
-            link = `<a href="${esc_attr(req.body.link)}" target="_blank"
-            rel="noreferrer"
+            link = `<a href="${esc_attr(req.body.link)}" target="_blank" rel="noopener noreferrer"
             className="text-blue-500 hover:underline">${esc_attr(req.body.linkText)}</a>`;
           }
           h1text = esc_attr(req.body.h1text);
