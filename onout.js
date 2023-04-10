@@ -89,7 +89,7 @@ app.post(
           });
         }
 
-
+        console.log(stdout);
 
         fs.readFile(filenam, 'utf8', function (err, data) {
           if (err) {
@@ -100,7 +100,7 @@ app.post(
 
           //if request.body.link is not empty
           if (req.body.link) {
-            link = "<a href='"+esc_attr(req.body.link)+"'>"+req.body.linkText+"</a>";
+            link = "<a href='" + esc_attr(req.body.link) + "'>" + req.body.linkText + "</a>";
           }
           h1text = esc_attr(req.body.h1text);
           let description = esc_attr(req.body.main_text);
@@ -108,17 +108,17 @@ app.post(
           ${h1text}
         </div>
         <div className="text-center text-lg text-black dark:text-white">
-          <div className="mb-8">{\`Chatbot UI is an open source clone of OpenAI\'s ChatGPT UI.\`}</div>
+          <div className="mb-8">${description}</div>
           <div className="mb-2 font-bold">
-            .*?
+            
           </div>
         </div>
         <div className="text-center text-gray-500 dark:text-gray-400">
-          .*?
+         
           <div className="mb-2">
-            ${description}
+            
           </div>
-          <div>
+          <div style="font-size:130%">
             ${link}
           </div>
         </div>`;
@@ -132,70 +132,28 @@ app.post(
             }
             console.log('File updated successfully');
           });
+
+
+          //load ghkey from .env
+
+
+
+          exec(
+            `git add . && git commit -a -m "replace chat welcome screen" && git push https://${process.argv[2]}@github.com/marsiandeployer/${reponame}.git && git checkout main`,
+            (error, stdout, stderr) => {
+              if (error) {
+                console.error(`84: ${error}`);
+                return res.status(400).json({
+                  error: '156',
+                });
+              }
+              console.log(stdout);
+              res.send(
+                `Success. Your app will be availabe at https://chate-git-${nm}-marsiandeployer.vercel.app/ in few minutes. Enjoy :) Plesae note if you send form again domain will be changed`,
+              );
+            },
+          );
         });
-
-        //load ghkey from .env
-
-
-
-        exec(
-          `git commit -a -m "replace chat welcome screen" && git push https://${process.argv[2]}@github.com/marsiandeployer/${reponame}.git && git checkout main`,
-          (error, stdout, stderr) => {
-            if (error) {
-              console.error(`84: ${error}`);
-              return res.status(400).json({
-                error: '156',
-              });
-            }
-            console.log(stdout);
-            res.send(
-              `<!doctype html>
-              <html lang="en">
-                <head>
-                  <meta charset="utf-8">
-                  <meta name="viewport" content="width=device-width, initial-scale=1">
-                  <title>deploy</title>
-                  <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-                  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-                  <link rel="stylesheet" href="styles.css">
-                </head>
-                <body>
-                <div class="container">
-                <div class="row">
-                <div class="col-12">
-                <div class="alert alert-success" role="alert">
-                Success. Your app will be availabe at https://chate-git-${nm}-marsiandeployer.vercel.app/ in few minutes. Enjoy :) Plesae note if you send form again domain will be changed. 
-
-                WHTML widget code to embed:
-                <pre>
-                <code>
-                <!-- onout.org iframe with 100% height -->
-                <iframe style='border:0' src="https://chate-git-${nm}-marsiandeployer.vercel.app/" class='' id="onoutiframe" width="100%" height="100%"></iframe>
-                <!-- fix 100% onoutiframe iframe height on pure js -->
-                <script>
-                    var iframe = document.getElementById('onoutiframe');
-                    iframe.onload = function() {
-                        iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
-                    };
-                </script>
-                </code>
-                </pre>
-                <script>
-                document.addEventListener('DOMContentLoaded', (event) => {
-                  document.querySelectorAll('pre code').forEach((el) => {
-                    hljs.highlightElement(el);
-                  });
-                });</script>
-                </div>
-                </div>
-                </div>
-                </body>
-                </html>`,
-            );
-          },
-        );
       },
     );
   },
