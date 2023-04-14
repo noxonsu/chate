@@ -182,18 +182,18 @@ app.post(
                     <div class="container col-5">
                     
                     <Br>  <bR><br>
-                    <h1><a href="https://chate-git-${nm}-marsiandeployer.vercel.app/" target=_blank>https://chate-git-${nm}-marsiandeployer.vercel.app/</a></h1>
+                    <h1><a href="https://chate-git-${nm}-marsiandeployer.vercel.app/" target=_blank>✅ https://chate-git-${nm}-marsiandeployer.vercel.app/</a></h1>
                     <br>
                     <div class="alert alert-success" role="alert">
-                Success. Your app will be availabe at https://chate-git-${nm}-marsiandeployer.vercel.app/ in <span id='incomeTicker'>60</span>s. Enjoy :) Plesae note if you send form again domain will be changed . 
-                <br><script>var incomeTicker = 60;
+                Success. Your app will be availabe in <span id='incomeTicker'>70</span>s. Enjoy :) Plesae note if you send form again domain will be changed . 
+                <br><script>var incomeTicker = 70;
 
                 window.setInterval(function(){
                  if (incomeTicker > 0)
                    incomeTicker--;
                       document.getElementById("incomeTicker").innerHTML = incomeTicker;
                 if (incomeTicker <= 0)
-                  incomeTicker = 60;
+                  incomeTicker = 30;
                 }, 1000);
                 </script><Br><br>
                 <h2>Widget HTML code to embed on your site:</h2>
@@ -218,13 +218,13 @@ iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
         document.getElementById('iframe-generator-form').addEventListener('submit', async (event) => {
             event.preventDefault();
             const siteUrl = document.getElementById('site-url').value;
-
+            const siteTitle = document.getElementById('site-title').value; 
             const response = await fetch('https://zips.onout.org/generate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ siteUrl })
+                body: JSON.stringify({ siteUrl, siteTitle})
             });
 
             if (response.ok) {
