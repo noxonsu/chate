@@ -179,7 +179,7 @@ app.post(
                     <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
                   
                   
-                    <div class="container col-5">
+                    <div class="">
                     
                     <Br>  <bR><br>
                     <h1><a href="https://chate-git-${nm}-marsiandeployer.vercel.app/" target=_blank>✅ https://chate-git-${nm}-marsiandeployer.vercel.app/</a></h1>
