@@ -212,6 +212,7 @@ iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
                 <h2>zip archive with site:</h2>
                 <form id="iframe-generator-form">
         <input type="hidden" value="https://chate-git-${nm}-marsiandeployer.vercel.app/" id="site-url" name="site-url" required>
+        <input type="hidden" value="${h1text}" id="site-title" name="site-title" required>
         <button type="submit">Download zip archive</button>
     </form>
 
