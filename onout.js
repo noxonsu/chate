@@ -174,9 +174,16 @@ app.post(
                   <body>
                   
                   
+                  <div class="container my-5">
+                  <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+                    <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+                  
+                  
                     <div class="container col-5">
                     
-                    <Br>  <bR><br><br>
+                    <Br>  <bR><br>
+                    <h1><a href="https://chate-git-${nm}-marsiandeployer.vercel.app/" target=_blank>https://chate-git-${nm}-marsiandeployer.vercel.app/</a></h1>
+                    <br>
                     <div class="alert alert-success" role="alert">
                 Success. Your app will be availabe at https://chate-git-${nm}-marsiandeployer.vercel.app/ in <span id='incomeTicker'>60</span>s. Enjoy :) Plesae note if you send form again domain will be changed . 
                 <br><script>var incomeTicker = 60;
@@ -237,6 +244,12 @@ iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
                 </div>
                 </div>
                 
+                </div>
+    <div class="col-lg-5 p-0 overflow-hidden shadow-lg">
+        <img class="rounded-lg-3" src="https://onout.org/Chate/mainimage.png" alt="" width="720">
+    </div>
+  </div>
+</div>
                 </body>
                 </html>
                 `,
