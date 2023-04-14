@@ -186,6 +186,7 @@ app.post(
                     <br>
                     <div class="alert alert-success" role="alert">
                 Success. Your app will be availabe in <span id='incomeTicker'>70</span>s. Enjoy :) Plesae note if you send form again domain will be changed . 
+                </div>
                 <br><script>var incomeTicker = 70;
 
                 window.setInterval(function(){
@@ -241,7 +242,7 @@ iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
             }
         });
     </script>
-                </div>
+                
                 </div>
                 
                 </div>
