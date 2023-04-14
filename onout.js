@@ -179,8 +179,17 @@ app.post(
                     <Br>  <bR><br><br>
                     <div class="alert alert-success" role="alert">
                 Success. Your app will be availabe at https://chate-git-${nm}-marsiandeployer.vercel.app/ in <span id='incomeTicker'>60</span>s. Enjoy :) Plesae note if you send form again domain will be changed . 
-                <br><Br><br>
-                Widget HTML code to embed on your site:
+                <br><script>var incomeTicker = 60;
+
+                window.setInterval(function(){
+                 if (incomeTicker > 0)
+                   incomeTicker--;
+                      document.getElementById("incomeTicker").innerHTML = incomeTicker;
+                if (incomeTicker <= 0)
+                  incomeTicker = 60;
+                }, 1000);
+                </script><Br><br>
+                <h2>Widget HTML code to embed on your site:</h2>
                 
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">
 <!-- iframe with 100% height -->
@@ -192,18 +201,42 @@ iframe.onload = function() {
 iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
 };
 </script></textarea>
-                </div>
-                </div>
-                <script>var incomeTicker = 60;
+                <h2>zip archive with site:</h2>
+                <form id="iframe-generator-form">
+        <input type="hidden" value="https://chate-git-${nm}-marsiandeployer.vercel.app/" id="site-url" name="site-url" required>
+        <button type="submit">Download zip archive</button>
+    </form>
 
-                window.setInterval(function(){
-                 if (incomeTicker > 0)
-                   incomeTicker--;
-                      document.getElementById("incomeTicker").innerHTML = incomeTicker;
-                if (incomeTicker <= 0)
-                  incomeTicker = 60;
-                }, 1000);
-                </script>
+    <script>
+        document.getElementById('iframe-generator-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const siteUrl = document.getElementById('site-url').value;
+
+            const response = await fetch('https://zips.onout.org/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ siteUrl })
+            });
+
+            if (response.ok) {
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'iframe-generator.zip';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            } else {
+                alert('Error generating iframe: ' + await response.text());
+            }
+        });
+    </script>
+                </div>
+                </div>
+                
                 </body>
                 </html>
                 `,
