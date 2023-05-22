@@ -2,6 +2,7 @@
   "name": "ai-chatbot-starter",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +10,9 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "onout": "nodemon ./onout/onout.js",
+    "onout-prod": "node ./onout/onout.js"
   },
   "dependencies": {
     "@dqbd/tiktoken": "^1.0.2",
@@ -48,11 +51,13 @@
     "@types/uuid": "^9.0.1",
     "@vitest/coverage-c8": "^0.29.7",
     "autoprefixer": "^10.4.14",
+    "dotenv": "^16.0.3",
     "endent": "^2.1.0",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "gpt-3-encoder": "^1.1.4",
     "jsdom": "^21.1.1",
+    "nodemon": "^2.0.22",
     "postcss": "^8.4.21",
     "prettier": "^2.8.7",
     "prettier-plugin-tailwindcss": "^0.2.5",
