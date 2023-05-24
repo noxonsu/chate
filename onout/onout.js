@@ -1,10 +1,8 @@
-import appRouter from './appRouter.js';
-import constants from './constants.js';
-import utils from './utils.js';
+const appRouter = require('./appRouter')
+const constants = require('./constants')
+const utils = require('./utils')
 
-import express from 'express';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+const express = require('express')
 
 /*
 git commit main
@@ -16,9 +14,6 @@ if (!process.argv[2]) {
   throw new Error('Github key is required');
 }
 
-// Fix ReferenceError, because we cannot set __dirname directly in ES module.
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const app = express();
 
 app.use(express.static(__dirname));

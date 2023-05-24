@@ -1,6 +1,5 @@
-import constants from './constants.js';
-
-import jsHtmlencode from 'js-htmlencode';
+const constants = require('./constants')
+const jsHtmlencode = require('js-htmlencode')
 
 function escapeAttr(str) {
   return jsHtmlencode.htmlEncode(str);
@@ -67,9 +66,9 @@ function returnErrorsHtmlPage({ title, description }) {
   `);
 }
 
-export default {
+module.exports = {
   escapeAttr,
   isValidAccessCode,
   wrapInHtmlTemplate,
   returnErrorsHtmlPage,
-};
+}

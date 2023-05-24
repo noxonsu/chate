@@ -1,11 +1,10 @@
-import constants from './constants.js';
-import utils from './utils.js';
+const constants = require('./constants')
+const utils = require('./utils')
 
-import express from 'express';
-import { body, validationResult } from 'express-validator';
-import { exec } from 'node:child_process';
-import fs from 'node:fs';
-import request from 'request';
+const express = require('express')
+const { body, validationResult } = require('express-validator')
+const { exec } = require('node:child_process')
+const fs = require('node:fs')
 
 const router = new express.Router();
 
@@ -61,73 +60,49 @@ router.post(
       );
     }
 
-    fs.readFile(fileName, 'utf8', function (err, data) {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      //test regex is working
-      const matches = data.match(regex);
-      if (!matches) {
-        return res.status(400).json({
-          error:
-            'Failed to find regex, please contact us (error onout.js missing regex)',
-        });
-      } else {
-        res.send(`
-  <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>deploy</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-  
-	
-  <div class="container my-5">
-  <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
-    <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-      
-    <form method="post" action="/submit-form">
-    <div class="form-group">
-      <label for="h1text">1 Main title:</label>
-      <input type="text" class="form-control" name="h1text" id="h1text" placeholder="Welcome!" value="Your welcome message">
-    </div>
-    
-    <div class="form-group">
-      <label for="main_text">2 Main text</label>
-      <textarea class="form-control" style="width:500px;height:300px" required name="main_text" id="main_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</textarea>
-    </div>
-    
-    <div class="form-group">
-      <label for="link">3 Link where user can get access code:</label>
-      <input type="text" class="form-control" name="link" id="link" placeholder="https://www.buymeacoffee.com/onoutorg/e/127423" value="https://www.buymeacoffee.com/onoutorg/e/127423">
-    </div>
-    
-    <div class="form-group">
-      <label for="linkText">4 Text for link</label>
-      <input type="text" class="form-control" name="linkText" id="linkText" placeholder="Get API key here" value="Buy access">
-    </div>
-  <Br><br>
-    <input type="submit" class="btn btn-primary" value="deploy test" style="size:30px"> 
-    
-     <a href="https://t.me/onoutsupportbot" target="_blank">Support</a>
-  </form>
-    </div>
-    <div class="col-lg-5 p-0 overflow-hidden shadow-lg">
-        <img class="rounded-lg-3" src="https://onout.org/Chate/mainimage.png" alt="" width="720">
-    </div>
-  </div>
-</div>
-
-  </body>
-</html>
-  `);
-      }
-    });
+    return res.send(
+      utils.wrapInHtmlTemplate(`
+        <header>
+          <h1>Configure interface and deploy your widget</h1>
+        </header>
+        <main>
+          <form method="post" action="/submit-form">
+            <div class="form-group">
+              <label for="">OpenAI API key.</label>
+              <input id="" placeholder="" required />
+            </div>
+            
+            <h2>Interface</h2>
+          
+            <div class="form-group">
+              <label for="h1text">1. Main title.</label>
+              <input type="text" class="form-control" name="h1text" id="h1text" placeholder="Welcome!" value="Your welcome message">
+            </div>
+            
+            <div class="form-group">
+              <label for="main_text">2. Main description.</label>
+              <textarea class="form-control" style="width:500px;height:300px" required name="main_text" id="main_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</textarea>
+            </div>
+            
+            <h2>Monetization</h2>
+          
+            <div class="form-group">
+              <label for="link">3. Link to get an access code. Without it he won't be able to use your widget.</label>
+              <input type="text" name="link" id="link" placeholder="https://www.buymeacoffee.com/onoutorg/e/123456">
+            </div>
+            
+            <div class="form-group">
+              <label for="linkText">4. Text of the link for an access code.</label>
+              <input type="text" name="linkText" id="linkText" placeholder="Buy access code here" value="Buy access">
+            </div>
+            <input type="submit" class="btn btn-primary" value="Deploy">
+          </form>
+          <div>
+            <img class="rounded-lg-3" src="https://onout.org/Chate/mainimage.png" alt="" width="720">
+          </div>
+        </main>
+      `)
+    );
   },
 );
 
@@ -147,8 +122,6 @@ router.post(
     let api_response;
     let reponame = 'chate';
     //telegram api get bit name by api key
-
-    const { exec } = require('child_process');
     const nm = `i${new Date().getMinutes()}${new Date().getDate()}${new Date().getMonth()}${new Date().getFullYear()}`;
     console.log('nm:' + nm);
 
@@ -327,4 +300,4 @@ iframe.height = iframe.contentWindow.document.body.scrollHeight + 'px';
   },
 );
 
-export default router;
+module.exports = router

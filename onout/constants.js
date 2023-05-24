@@ -1,10 +1,10 @@
-import env from 'dotenv';
+const dotenv = require('dotenv')
 
 const {
   parsed: { ACCESS_CODE_PAYMENT_LINK, ACCESS_CODE },
-} = env.config();
+} = dotenv.config();
 
-export default {
+module.exports = {
   accessCodePaymentLink: ACCESS_CODE_PAYMENT_LINK,
   accessCode: ACCESS_CODE,
-};
+}
