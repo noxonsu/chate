@@ -405,24 +405,15 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         <Spinner size="16px" className="mx-auto" />
                       </div>
                     ) : (
-                      'Chatbot UI'
+                      'Леопард Лео'
                     )}
                   </div>
 
                   {models.length > 0 && (
                     <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
-                      <SystemPrompt
-                        conversation={selectedConversation}
-                        prompts={prompts}
-                        onChangePrompt={(prompt) =>
-                          handleUpdateConversation(selectedConversation, {
-                            key: 'prompt',
-                            value: prompt,
-                          })
-                        }
-                      />
+                      
                       <img src='https://raw.githubusercontent.com/noxonsu/onout.org/0d194d1ab4a37e0f26a40c470584642168321a2b/images/leoleo.jpg' />
-                      Начните чат со мной
+                      Что то знает про экологию
                     </div>
                   )}
                 </div>
