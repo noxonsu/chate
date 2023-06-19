@@ -411,8 +411,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
 
                   {models.length > 0 && (
                     <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
-                      <ModelSelect />
-
                       <SystemPrompt
                         conversation={selectedConversation}
                         prompts={prompts}
@@ -423,16 +421,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                           })
                         }
                       />
-
-                      <TemperatureSlider
-                        label={t('Temperature')}
-                        onChangeTemperature={(temperature) =>
-                          handleUpdateConversation(selectedConversation, {
-                            key: 'temperature',
-                            value: temperature,
-                          })
-                        }
-                      />
+                      <img src="https://raw.githubusercontent.com/noxonsu/onout.org/0d194d1ab4a37e0f26a40c470584642168321a2b/images/leoleo.jpg" alt="description of image" />
+                      Привет, я леопард, скажи "привет".
                     </div>
                   )}
                 </div>
