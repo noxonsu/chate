@@ -421,8 +421,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                           })
                         }
                       />
-                      <img src="https://raw.githubusercontent.com/noxonsu/onout.org/0d194d1ab4a37e0f26a40c470584642168321a2b/images/leoleo.jpg" alt="description of image" />
-                      Привет, я леопард, скажи "привет".
+                      <img src='https://raw.githubusercontent.com/noxonsu/onout.org/0d194d1ab4a37e0f26a40c470584642168321a2b/images/leoleo.jpg' />
+                      Начните чат со мной
                     </div>
                   )}
                 </div>
