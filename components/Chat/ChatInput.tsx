@@ -93,7 +93,9 @@ export const ChatInput = ({
     }
 
     if (!content) {
-      alert(t('Please enter a message'));
+      setContent('Ты всего лишь леопард, что ты можешь знать о спасении окружающей природы?');
+      
+      alert("Вы не ввели вопрос. Подставляем из примера (отправьте еще раз)")
       return;
     }
 
@@ -325,7 +327,7 @@ export const ChatInput = ({
               }`,
             }}
             placeholder={
-              t('Type a message or type "/" to select a prompt...') || ''
+              t('Ты всего лишь леопард, что ты можешь знать о спасении окружающей природы?') || ''
             }
             value={content}
             rows={1}

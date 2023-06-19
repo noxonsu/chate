@@ -396,7 +396,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             ref={chatContainerRef}
             onScroll={handleScroll}
           >
-            {selectedConversation?.messages.length === 0 ? (
+            {false ? (
               <>
                 <div className="mx-auto flex flex-col space-y-5 md:space-y-10 px-3 pt-5 md:pt-12 sm:max-w-[600px]">
                   <div className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
@@ -436,6 +436,27 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                     <IconClearAll size={18} />
                   </button>
                 </div>
+                
+                <div className="mx-auto flex flex-col space-y-5 md:space-y-10 px-3 pt-5 md:pt-12 sm:max-w-[600px]">
+                  <div className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
+                    {models.length === 0 ? (
+                      <div>
+                        <Spinner size="16px" className="mx-auto" />
+                      </div>
+                    ) : (
+                      'Леопард Лео'
+                    )}
+                  </div>
+
+                  {models.length > 0 && (
+                    <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
+                      
+                      <img src='https://raw.githubusercontent.com/noxonsu/onout.org/0d194d1ab4a37e0f26a40c470584642168321a2b/images/leoleo.jpg' />
+                      
+                    </div>
+                  )}
+                </div>
+                
                 {showSettings && (
                   <div className="flex flex-col space-y-10 md:mx-auto md:max-w-xl md:gap-6 md:py-3 md:pt-6 lg:max-w-2xl lg:px-0 xl:max-w-3xl">
                     <div className="flex h-full flex-col space-y-4 border-b border-neutral-200 p-4 dark:border-neutral-600 md:rounded-lg md:border">
