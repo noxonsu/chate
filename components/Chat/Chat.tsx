@@ -405,17 +405,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         <Spinner size="16px" className="mx-auto" />
                       </div>
                     ) : (
-                      'Леопард Лео'
+                      'Курица Агроном'
                     )}
                   </div>
 
-                  {models.length > 0 && (
-                    <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
-                      
-                      <img src='https://raw.githubusercontent.com/noxonsu/onout.org/0d194d1ab4a37e0f26a40c470584642168321a2b/images/leoleo.jpg' />
-                      Что то знает про экологию
-                    </div>
-                  )}
+                  
                 </div>
               </>
             ) : (
@@ -444,14 +438,14 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         <Spinner size="16px" className="mx-auto" />
                       </div>
                     ) : (
-                      'Леопард Лео'
+                      'Курица Агроном'
                     )}
                   </div>
 
                   {models.length > 0 && (
                     <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
                       
-                      <img src='https://raw.githubusercontent.com/noxonsu/onout.org/0d194d1ab4a37e0f26a40c470584642168321a2b/images/leoleo.jpg' />
+                      <img src='https://raw.githubusercontent.com/noxonsu/onout.org/ae216b82bba27e0f774a418da2a320a702034f82/images/kura.jpg' />
                       
                     </div>
                   )}
