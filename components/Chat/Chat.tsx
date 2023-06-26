@@ -260,26 +260,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   }, [autoScrollEnabled]);
 
   const handleScroll = () => {
-    if (chatContainerRef.current) {
-      const { scrollTop, scrollHeight, clientHeight } =
-        chatContainerRef.current;
-      const bottomTolerance = 30;
-
-      if (scrollTop + clientHeight < scrollHeight - bottomTolerance) {
-        setAutoScrollEnabled(false);
-        setShowScrollDownButton(true);
-      } else {
-        setAutoScrollEnabled(true);
-        setShowScrollDownButton(false);
-      }
-    }
+    
   };
 
   const handleScrollDown = () => {
-    chatContainerRef.current?.scrollTo({
-      top: chatContainerRef.current.scrollHeight,
-      behavior: 'smooth',
-    });
+    
   };
 
   const handleSettings = () => {
@@ -299,9 +284,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   };
 
   const scrollDown = () => {
-    if (autoScrollEnabled) {
-      messagesEndRef.current?.scrollIntoView(true);
-    }
+    
   };
   const throttledScrollDown = throttle(scrollDown, 250);
 
