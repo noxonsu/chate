@@ -255,10 +255,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   );
 
   const scrollToBottom = useCallback(() => {
-    if (autoScrollEnabled) {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-      textareaRef.current?.focus();
-    }
+    
+    
   }, [autoScrollEnabled]);
 
   const handleScroll = () => {
