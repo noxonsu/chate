@@ -442,13 +442,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                     )}
                   </div>
 
-                  {models.length > 0 && (
-                    <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
-                      
-                      <img src='https://raw.githubusercontent.com/noxonsu/onout.org/ae216b82bba27e0f774a418da2a320a702034f82/images/kura.jpg' />
-                      
-                    </div>
-                  )}
+                  
                 </div>
                 
                 {showSettings && (
