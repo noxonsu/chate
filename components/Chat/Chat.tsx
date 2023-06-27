@@ -389,8 +389,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                       'Курица Агроном'
                     )}
                   </div>
-
-                  
+                      
                 </div>
               </>
             ) : (
@@ -421,8 +420,10 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                     ) : (
                       'Курица Агроном'
                     )}
+                    <br />
+                    (Задайте любой вопрос ниже)
                   </div>
-
+                  
                   
                 </div>
                 
