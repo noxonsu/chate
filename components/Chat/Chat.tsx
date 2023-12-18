@@ -386,7 +386,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         <Spinner size="16px" className="mx-auto" />
                       </div>
                     ) : (
-                      'Курица Агроном'
+                      process.env.MAIN_TITLE
                     )}
                   </div>
                       
@@ -403,10 +403,10 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         <Spinner size="16px" className="mx-auto" />
                       </div>
                     ) : (
-                      'Курица Агроном'
+                      //load MAIN_TITLE from env
+                      process.env.MAIN_TITLE
                     )}
-                    <br />
-                    (Задайте любой вопрос ниже)
+                    
                   </div>
                   
                   
