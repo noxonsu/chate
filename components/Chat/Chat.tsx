@@ -34,6 +34,8 @@ import { SystemPrompt } from './SystemPrompt';
 import { TemperatureSlider } from './Temperature';
 import { MemoizedChatMessage } from './MemoizedChatMessage';
 
+const MAIN_TITLE = process.env.NEXT_PUBLIC_MAIN_TITLE || 'Default Title';
+
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
 }
@@ -52,7 +54,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
       messageIsStreaming,
       modelError,
       loading,
-      prompts,
+      prompts
     },
     handleUpdateConversation,
     dispatch: homeDispatch,
@@ -386,7 +388,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         <Spinner size="16px" className="mx-auto" />
                       </div>
                     ) : (
-                      process.env.MAIN_TITLE
+                      MAIN_TITLE
                     )}
                   </div>
                       
@@ -404,7 +406,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                       </div>
                     ) : (
                       //load MAIN_TITLE from env
-                      process.env.MAIN_TITLE
+                      MAIN_TITLE
                     )}
                     
                   </div>
