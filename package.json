@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "devcustomport": "next dev -p $npm_config_port",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
