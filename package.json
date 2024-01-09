@@ -7,6 +7,7 @@
     "devcustomport": "next dev -p $npm_config_port",
     "build": "next build",
     "start": "next start",
+    "startcustomport": "next start -p $npm_config_port",
     "lint": "next lint",
     "format": "prettier --write .",
     "test": "vitest",
