@@ -2,13 +2,12 @@ import { DEFAULT_SYSTEM_PROMPT, DEFAULT_TEMPERATURE } from '@/utils/app/const';
 import { OpenAIError, OpenAIStream } from '@/utils/server';
 
 import { ChatBody, Message } from '@/types/chat';
-
+import { parse } from 'url';
 // @ts-expect-error
 import wasm from '../../node_modules/@dqbd/tiktoken/lite/tiktoken_bg.wasm?module';
 
 import tiktokenModel from '@dqbd/tiktoken/encoders/cl100k_base.json';
 import { Tiktoken, init } from '@dqbd/tiktoken/lite/init';
-
 export const config = {
   runtime: 'edge',
 };
@@ -23,10 +22,13 @@ const handler = async (req: Request): Promise<Response> => {
       tiktokenModel.special_tokens,
       tiktokenModel.pat_str,
     );
+    const { query } = parse(req.url, true);
+    let myParam = parseInt(query.myParam as string) || 0;
 
     let promptToSend = prompt;
+    //console.log(req)
     if (!promptToSend) {
-      promptToSend = DEFAULT_SYSTEM_PROMPT;
+      promptToSend = await DEFAULT_SYSTEM_PROMPT(myParam);
     }
 
     let temperatureToUse = temperature;

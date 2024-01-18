@@ -1,11 +1,20 @@
-export const DEFAULT_SYSTEM_PROMPT =
-  process.env.NEXT_PUBLIC_DEFAULT_SYSTEM_PROMPT ||
-  "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown.";
 
+export const DEFAULT_SYSTEM_PROMPT = async (number: number = 0) => {
+  if (number == 0) {
+    process.env.NEXT_PUBLIC_DEFAULT_SYSTEM_PROMPT ||
+      "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown.";
+
+  } else {
+
+    const response = await fetch(`https://drivingschool.wpmix.net/test.php?myParam=${number}`);
+    const data = await response.text();
+    return data;
+  }
+};
 export const OPENAI_API_HOST =
   process.env.OPENAI_API_HOST || 'https://api.openai.com';
 
-export const DEFAULT_TEMPERATURE = 
+export const DEFAULT_TEMPERATURE =
   parseFloat(process.env.NEXT_PUBLIC_DEFAULT_TEMPERATURE || "1");
 
 export const OPENAI_API_TYPE =
