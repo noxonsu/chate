@@ -112,8 +112,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         };
         
         
-        const myParam = parseInt(router.query.myParam || 0); // Replace 'myParam' with your actual query parameter name
-        const endpoint = "api/chat/?myParam=" + myParam;
+        const shortcodeid = parseInt(router.query.shortcodeid || 0); // Replace 'myParam' with your actual query parameter name
+        const endpoint = "api/chat/?shortcodeid=" + shortcodeid;
         
         let body;
         if (!plugin) {

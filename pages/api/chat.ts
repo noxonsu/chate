@@ -23,12 +23,12 @@ const handler = async (req: Request): Promise<Response> => {
       tiktokenModel.pat_str,
     );
     const { query } = parse(req.url, true);
-    let myParam = parseInt(query.myParam as string) || 0;
+    let shortcodeid = parseInt(query.shortcodeid as string) || 0;
 
     let promptToSend = prompt;
-    //console.log(req)
+    console.log(shortcodeid)
     if (!promptToSend) {
-      promptToSend = await DEFAULT_SYSTEM_PROMPT(myParam);
+      promptToSend = await DEFAULT_SYSTEM_PROMPT(shortcodeid);
     }
 
     let temperatureToUse = temperature;
