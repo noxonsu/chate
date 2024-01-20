@@ -10,7 +10,7 @@ import {
 import { useTranslation } from 'next-i18next';
 
 import { DEFAULT_SYSTEM_PROMPT } from '@/utils/app/const';
-
+import { useRouter } from 'next/router';
 import { Conversation } from '@/types/chat';
 import { Prompt } from '@/types/prompt';
 
@@ -28,6 +28,8 @@ export const SystemPrompt: FC<Props> = ({
   prompts,
   onChangePrompt,
 }) => {
+
+  const router = useRouter();
   const { t } = useTranslation('chat');
 
   const [value, setValue] = useState<string>('');
@@ -165,12 +167,17 @@ export const SystemPrompt: FC<Props> = ({
       textareaRef.current.style.height = `${textareaRef.current?.scrollHeight}px`;
     }
   }, [value]);
-
+  const shortcodeid = parseInt(Array.isArray(router.query.shortcodeid) ? router.query.shortcodeid[0] : router.query.shortcodeid || '0', 10); // Replace 'myParam' with your actual query parameter name
+        
   useEffect(() => {
     if (conversation.prompt) {
       setValue(conversation.prompt);
     } else {
-      setValue(DEFAULT_SYSTEM_PROMPT);
+      const setDefaultValue = async () => {
+        setValue(await DEFAULT_SYSTEM_PROMPT(shortcodeid));
+      };
+
+      setDefaultValue();
     }
   }, [conversation]);
 
