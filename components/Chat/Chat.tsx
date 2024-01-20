@@ -34,6 +34,9 @@ import { SystemPrompt } from './SystemPrompt';
 import { TemperatureSlider } from './Temperature';
 import { MemoizedChatMessage } from './MemoizedChatMessage';
 
+import { useRouter } from 'next/router';
+
+
 const MAIN_TITLE = process.env.NEXT_PUBLIC_MAIN_TITLE || 'Default Title';
 
 interface Props {
@@ -42,7 +45,7 @@ interface Props {
 
 export const Chat = memo(({ stopConversationRef }: Props) => {
   const { t } = useTranslation('chat');
-
+  const router = useRouter();
   const {
     state: {
       selectedConversation,
@@ -71,8 +74,13 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSend = useCallback(
+    
+
     async (message: Message, deleteCount = 0, plugin: Plugin | null = null) => {
+      
       if (selectedConversation) {
+
+        
         let updatedConversation: Conversation;
         if (deleteCount) {
           const updatedMessages = [...selectedConversation.messages];
@@ -102,7 +110,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           prompt: updatedConversation.prompt,
           temperature: updatedConversation.temperature,
         };
-        const endpoint = getEndpoint(plugin);
+        
+        
+        const shortcodeid = parseInt(router.query.shortcodeid || 0); // Replace 'myParam' with your actual query parameter name
+        const endpoint = "api/chat/?shortcodeid=" + shortcodeid;
+        
         let body;
         if (!plugin) {
           body = JSON.stringify(chatBody);

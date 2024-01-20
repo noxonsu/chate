@@ -1,11 +1,24 @@
-export const DEFAULT_SYSTEM_PROMPT =
-  process.env.NEXT_PUBLIC_DEFAULT_SYSTEM_PROMPT ||
-  "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown.";
 
+export const DEFAULT_SYSTEM_PROMPT = async (number: number = 0) => {
+  if (number == 0) {
+    return process.env.NEXT_PUBLIC_DEFAULT_SYSTEM_PROMPT ||
+      "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown.";
+
+  } else {
+    //TODO get url from sql database ../Sensorica/data.db sqllite
+    
+    let url = `https://drivingschool.wpmix.net/?rest_route=/sensorica2/v1/shortcode/${number}`;
+    console.log(url);
+    const response = await fetch(url);
+    const data = await response.text();
+    console.log(data);
+    return data;
+  }
+};
 export const OPENAI_API_HOST =
   process.env.OPENAI_API_HOST || 'https://api.openai.com';
 
-export const DEFAULT_TEMPERATURE = 
+export const DEFAULT_TEMPERATURE =
   parseFloat(process.env.NEXT_PUBLIC_DEFAULT_TEMPERATURE || "1");
 
 export const OPENAI_API_TYPE =
