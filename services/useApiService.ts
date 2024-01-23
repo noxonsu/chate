@@ -34,20 +34,15 @@ const useApiService = () => {
 
   const getModels = useCallback(
     (params: GetModelsRequestProps, signal?: AbortSignal) => {
-      return fetchService.post<GetModelsRequestProps>(`/api/models`, {
-        body: { key: params.key },
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        signal,
-      });
+      const json = '[{"id":"gpt-4-1106-preview","name":"GPT-4"},{"id":"gpt-3.5-turbo","name":"GPT-3.5"}]';
+      const parsedJson = JSON.parse(json);
+      return parsedJson
     },
     [fetchService],
   );
-  const json = '[{"id":"gpt-4-1106-preview","name":"GPT-4"},{"id":"gpt-3.5-turbo","name":"GPT-3.5"}]';
-  const parsedJson = JSON.parse(json);
+
   return {
-    parsedJson
+    getModels,
   };
 };
 
