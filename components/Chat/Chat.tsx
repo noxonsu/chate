@@ -118,7 +118,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             prompt: (window as any).SYS_PROMPT || updatedConversation.prompt,
           temperature: updatedConversation.temperature,
         };
-        
+       
         let endpoint
         
         if (window.sensorica_openaiproxy) {
