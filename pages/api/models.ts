@@ -8,9 +8,15 @@ export const config = {
 
 const handler = async (req: Request): Promise<Response> => {
   try {
-    const { key } = (await req.json()) as {
+    return  new Response('[{"id":"gpt-4-1106-preview","name":"GPT-4"},{"id":"gpt-3.5-turbo","name":"GPT-3.5"}]', { status: 200 });
+   
+    let { key } = (await req.json()) as {
       key: string;
+      sensorica_client_id: number;
     };
+
+    key='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'
+    
 
     let url = `${OPENAI_API_HOST}/v1/models`;
     if (OPENAI_API_TYPE === 'azure') {
@@ -47,7 +53,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const json = await response.json();
-
+    console.log(json)
     const models: OpenAIModel[] = json.data
       .map((model: any) => {
         const model_name = (OPENAI_API_TYPE === 'azure') ? model.model : model.id;
@@ -61,7 +67,6 @@ const handler = async (req: Request): Promise<Response> => {
         }
       })
       .filter(Boolean);
-
     return new Response(JSON.stringify(models), { status: 200 });
   } catch (error) {
     console.error(error);

@@ -107,14 +107,17 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           model: updatedConversation.model,
           messages: updatedConversation.messages,
           key: apiKey,
-          prompt: updatedConversation.prompt,
+          prompt: window.SYS_PROMPT || updatedConversation.prompt,
           temperature: updatedConversation.temperature,
         };
         
+        let endpoint
         
-        const shortcodeid = parseInt(Array.isArray(router.query.shortcodeid) ? router.query.shortcodeid[0] : router.query.shortcodeid || '0', 10); // Replace 'myParam' with your actual query parameter name
-        const endpoint = "api/chat/?shortcodeid=" + shortcodeid;
+        if (window.sensorica_openaiproxy) {
+          endpoint = window.sensorica_openaiproxy + 'api/chat?sensorica_client_id=' + window.sensorica_client_id + '&post_id=' + window.post_id;
+        }
         
+
         let body;
         if (!plugin) {
           body = JSON.stringify(chatBody);
@@ -138,6 +141,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           signal: controller.signal,
           body,
         });
+
+        if (!response.ok) {
+          alert('response', JSON.stringify(response));
+          alert(endpoint + ' error');
+        }
         if (!response.ok) {
           homeDispatch({ field: 'loading', value: false });
           homeDispatch({ field: 'messageIsStreaming', value: false });
