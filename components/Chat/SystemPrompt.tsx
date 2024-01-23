@@ -167,14 +167,13 @@ export const SystemPrompt: FC<Props> = ({
       textareaRef.current.style.height = `${textareaRef.current?.scrollHeight}px`;
     }
   }, [value]);
-  const shortcodeid = parseInt(Array.isArray(router.query.shortcodeid) ? router.query.shortcodeid[0] : router.query.shortcodeid || '0', 10); // Replace 'myParam' with your actual query parameter name
         
   useEffect(() => {
     if (conversation.prompt) {
       setValue(conversation.prompt);
     } else {
       const setDefaultValue = async () => {
-        setValue(await DEFAULT_SYSTEM_PROMPT(shortcodeid));
+        setValue(await DEFAULT_SYSTEM_PROMPT());
       };
 
       setDefaultValue();
