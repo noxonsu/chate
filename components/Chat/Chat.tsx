@@ -43,6 +43,14 @@ interface Props {
   stopConversationRef: MutableRefObject<boolean>;
 }
 
+declare global {
+  interface Window {
+    sensorica_openaiproxy?: string;
+    sensorica_client_id?: string;
+    post_id?: string;
+  }
+}
+
 export const Chat = memo(({ stopConversationRef }: Props) => {
   const { t } = useTranslation('chat');
   const router = useRouter();
@@ -107,7 +115,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           model: updatedConversation.model,
           messages: updatedConversation.messages,
           key: apiKey,
-          prompt: window.SYS_PROMPT || updatedConversation.prompt,
+            prompt: (window as any).SYS_PROMPT || updatedConversation.prompt,
           temperature: updatedConversation.temperature,
         };
         
@@ -133,7 +141,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           });
         }
         const controller = new AbortController();
-        const response = await fetch(endpoint, {
+        const response = await fetch(endpoint || 'api/chat', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -143,7 +151,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         });
 
         if (!response.ok) {
-          alert('response', JSON.stringify(response));
+          alert('response: ' + JSON.stringify(response || 'no response'));
           alert(endpoint + ' error');
         }
         if (!response.ok) {
