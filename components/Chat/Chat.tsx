@@ -37,7 +37,6 @@ import { MemoizedChatMessage } from './MemoizedChatMessage';
 import { useRouter } from 'next/router';
 
 
-const MAIN_TITLE = process.env.NEXT_PUBLIC_MAIN_TITLE || 'Default Title';
 
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
@@ -48,8 +47,12 @@ declare global {
     sensorica_openaiproxy?: string;
     sensorica_client_id?: string;
     post_id?: string;
+    main_title?: string;
   }
 }
+
+const MAIN_TITLE = window.main_title || 'Default Title';
+
 
 export const Chat = memo(({ stopConversationRef }: Props) => {
   const { t } = useTranslation('chat');
