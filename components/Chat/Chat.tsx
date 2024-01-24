@@ -51,7 +51,7 @@ declare global {
   }
 }
 
-const MAIN_TITLE = window.main_title || 'Default Title';
+const MAIN_TITLE = typeof window !== 'undefined' ? window.main_title || 'Default Title' : 'Default Title';
 
 
 export const Chat = memo(({ stopConversationRef }: Props) => {
