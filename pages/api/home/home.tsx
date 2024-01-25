@@ -46,6 +46,11 @@ interface Props {
   serverSidePluginKeysSet: boolean;
   defaultModelId: OpenAIModelID;
 }
+declare global {
+  interface Window {
+    chatUniqId: string;
+  }
+}
 
 const Home = ({
   serverSideApiKeyIsSet,
@@ -180,7 +185,7 @@ const Home = ({
 
   const handleNewConversation = () => {
     const lastConversation = conversations[conversations.length - 1];
-
+    
     const newConversation: Conversation = {
       id: uuidv4(),
       name: t('New Conversation'),
@@ -259,12 +264,12 @@ const Home = ({
       });
     }
 
-    const apiKey = localStorage.getItem('apiKey');
+    const apiKey = localStorage.getItem('apiKey' + window.chatUniqId);
 
     if (serverSideApiKeyIsSet) {
       dispatch({ field: 'apiKey', value: '' });
 
-      localStorage.removeItem('apiKey');
+      localStorage.removeItem('apiKey' + window.chatUniqId);
     } else if (apiKey) {
       dispatch({ field: 'apiKey', value: apiKey });
     }
@@ -282,27 +287,27 @@ const Home = ({
       dispatch({ field: 'showPromptbar', value: false });
     }
 
-    const showChatbar = localStorage.getItem('showChatbar');
+    const showChatbar = localStorage.getItem('showChatbar' + window.chatUniqId);
     if (showChatbar) {
       dispatch({ field: 'showChatbar', value: showChatbar === 'true' });
     }
 
-    const showPromptbar = localStorage.getItem('showPromptbar');
+    const showPromptbar = localStorage.getItem('showPromptbar' + window.chatUniqId);
     if (showPromptbar) {
       dispatch({ field: 'showPromptbar', value: showPromptbar === 'true' });
     }
 
-    const folders = localStorage.getItem('folders');
+    const folders = localStorage.getItem('folders' + window.chatUniqId);
     if (folders) {
       dispatch({ field: 'folders', value: JSON.parse(folders) });
     }
 
-    const prompts = localStorage.getItem('prompts');
+    const prompts = localStorage.getItem('prompts' + window.chatUniqId);
     if (prompts) {
       dispatch({ field: 'prompts', value: JSON.parse(prompts) });
     }
 
-    const conversationHistory = localStorage.getItem('conversationHistory');
+    const conversationHistory = localStorage.getItem('conversationHistory' + window.chatUniqId);
     if (conversationHistory) {
       const parsedConversationHistory: Conversation[] =
         JSON.parse(conversationHistory);
@@ -313,7 +318,7 @@ const Home = ({
       dispatch({ field: 'conversations', value: cleanedConversationHistory });
     }
 
-    const selectedConversation = localStorage.getItem('selectedConversation');
+    const selectedConversation = localStorage.getItem('selectedConversation' + window.chatUniqId);
     if (selectedConversation) {
       const parsedSelectedConversation: Conversation =
         JSON.parse(selectedConversation);

@@ -120,8 +120,10 @@ const Sidebar = <T,>({
     <div>
       
     </div>
-  ) : (
-    <OpenSidebarButton onClick={toggleOpen} side={side} />
+  ) : (<div>
+      
+    </div>
+    /*<OpenSidebarButton onClick={toggleOpen} side={side} />*/
   );
 };
 

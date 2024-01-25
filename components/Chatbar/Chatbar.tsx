@@ -25,7 +25,11 @@ import ChatbarContext from './Chatbar.context';
 import { ChatbarInitialState, initialState } from './Chatbar.state';
 
 import { v4 as uuidv4 } from 'uuid';
-
+declare global {
+  interface Window {
+    chatUniqId: string;
+  }
+}
 export const Chatbar = () => {
   const { t } = useTranslation('sidebar');
 
@@ -50,7 +54,7 @@ export const Chatbar = () => {
     (apiKey: string) => {
       homeDispatch({ field: 'apiKey', value: apiKey });
 
-      localStorage.setItem('apiKey', apiKey);
+      localStorage.setItem('apiKey' + window.chatUniqId, apiKey);
     },
     [homeDispatch],
   );
@@ -128,8 +132,8 @@ export const Chatbar = () => {
 
     homeDispatch({ field: 'conversations', value: [] });
 
-    localStorage.removeItem('conversationHistory');
-    localStorage.removeItem('selectedConversation');
+    localStorage.removeItem('conversationHistory' + window.chatUniqId);
+    localStorage.removeItem('selectedConversation' + window.chatUniqId);
 
     const updatedFolders = folders.filter((f) => f.type !== 'chat');
 
@@ -168,13 +172,13 @@ export const Chatbar = () => {
           },
         });
 
-      localStorage.removeItem('selectedConversation');
+      localStorage.removeItem('selectedConversation' + window.chatUniqId);
     }
   };
 
   const handleToggleChatbar = () => {
     homeDispatch({ field: 'showChatbar', value: !showChatbar });
-    localStorage.setItem('showChatbar', JSON.stringify(!showChatbar));
+    localStorage.setItem('showChatbar' + window.chatUniqId, JSON.stringify(!showChatbar));
   };
 
   const handleDrop = (e: any) => {

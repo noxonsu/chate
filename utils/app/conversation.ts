@@ -21,10 +21,16 @@ export const updateConversation = (
   };
 };
 
+declare global {
+  interface Window {
+    chatUniqId: string;
+  }
+}
+
 export const saveConversation = (conversation: Conversation) => {
-  localStorage.setItem('selectedConversation', JSON.stringify(conversation));
+  localStorage.setItem('selectedConversation' + window.chatUniqId, JSON.stringify(conversation));
 };
 
 export const saveConversations = (conversations: Conversation[]) => {
-  localStorage.setItem('conversationHistory', JSON.stringify(conversations));
+  localStorage.setItem('conversationHistory' + window.chatUniqId, JSON.stringify(conversations));
 };
