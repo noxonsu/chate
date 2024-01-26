@@ -126,6 +126,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         
         if (window.sensorica_openaiproxy) {
           endpoint = window.sensorica_openaiproxy + 'api/chat?sensorica_client_id=' + window.sensorica_client_id + '&post_id=' + window.post_id;
+        } else {
+          endpoint = 'api/chat'
         }
         
 

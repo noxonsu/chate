@@ -8,7 +8,7 @@ export const config = {
 
 const handler = async (req: Request): Promise<Response> => {
   try {
-    return  new Response('[{"id":"gpt-4-1106-preview","name":"GPT-4"},{"id":"gpt-3.5-turbo","name":"GPT-3.5"}]', { status: 200 });
+    return  new Response('[{"id":"gpt-4-turbo-preview","name":"GPT-4"},{"id":"gpt-3.5-turbo","name":"GPT-3.5"}]', { status: 200 });
    
     let { key } = (await req.json()) as {
       key: string;
