@@ -154,10 +154,9 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           signal: controller.signal,
           body,
         });
-
+        console.log('response', response);
         if (!response.ok) {
-          alert('response: ' + JSON.stringify(response || 'no response'));
-          alert(endpoint + ' error');
+          alert('error:'+endpoint + ' . satus code: ' + response.status + ' . status text: ' + response.statusText);
         }
         if (!response.ok) {
           homeDispatch({ field: 'loading', value: false });
