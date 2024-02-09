@@ -89,9 +89,15 @@ export const OpenAIStream = async (
       const onParse = (event: ParsedEvent | ReconnectInterval) => {
         if (event.type === 'event') {
           const data = event.data;
-
+      
+          // Check if data is "[DONE]" message or similar non-JSON message
+          if (data.trim() === "[DONE]") {
+            controller.close(); // Close the stream controller if done
+            return; // Exit the function to avoid parsing the done message as JSON
+          }
+      
           try {
-            const json = JSON.parse(data);
+            const json = JSON.parse(data); // Proceed with JSON parsing if not a done message
             if (json.choices[0].finish_reason != null) {
               controller.close();
               return;
@@ -100,10 +106,11 @@ export const OpenAIStream = async (
             const queue = encoder.encode(text);
             controller.enqueue(queue);
           } catch (e) {
-            controller.error(e);
+            controller.error(e); // Handle parsing error
           }
         }
       };
+      
 
       const parser = createParser(onParse);
 

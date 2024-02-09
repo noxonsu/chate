@@ -16,7 +16,8 @@ export const config = {
 
 const handler = async (req: Request): Promise<Response> => {
     let { model, messages, key, prompt, temperature } = (await req.json()) as ChatBody;
-    console.log("model", model);
+    
+    
     await init((imports) => WebAssembly.instantiate(wasm, imports));
     const encoding = new Tiktoken(
       tiktokenModel.bpe_ranks,
@@ -39,6 +40,15 @@ const handler = async (req: Request): Promise<Response> => {
       let responsedata = await response.json()
       key = responsedata.data.API_KEY;
       promptToSend = responsedata.data.SYSTEM_PROMPT;
+      let sensorica_model = responsedata.data.sensorica_openai_model;
+      
+      if (sensorica_model =='gpt-4-turbo-preview') {
+        model = { id: "gpt-4-turbo-preview", name: "GPT-4-turbo", maxLength: 300000, tokenLimit: 122000 }
+      } else {
+        model = { id: "gpt-3.5-turbo-1106", name: "GPT-3.5", maxLength: 16000, tokenLimit: 124000 }
+      }
+      console.log("model", model);
+      
       //console.log("promptToSend", promptToSend);
       if (!promptToSend) {
         return new Response(JSON.stringify({

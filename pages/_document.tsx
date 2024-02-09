@@ -15,7 +15,7 @@ export default function Document(props: Props) {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-title" content="Chatbot UI"></meta>
         {process.env.NODE_ENV === 'development' && (
-          <script dangerouslySetInnerHTML={{ __html: ' window.sensorica_client_id = "5";window.post_id = "136"; window.chatUniqId = sensorica_client_id+"_"+post_id; window.main_title = "Welcome to Sensorica AI Presale Consultant. Ready to Guide You!";window.sensorica_openaiproxy = "https://sensorica.onout.org/wp-json/sensorica/v1/openaiapi/";' }}></script>
+          <script dangerouslySetInnerHTML={{ __html: ' window.sensorica_client_id = "10";window.post_id = "85"; window.chatUniqId = sensorica_client_id+"_"+post_id; window.main_title = "Welcome to Sensorica AI Presale Consultant. Ready to Guide You!";window.sensorica_openaiproxy = "https://refactored-fortnight-w945676vw9h9pqp-3000.app.github.dev/";' }}></script>
         )}
       </Head>
       <body>

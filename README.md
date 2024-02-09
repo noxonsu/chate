@@ -8,14 +8,7 @@ See a [demo](https://twitter.com/mckaywrigley/status/1640380021423603713?s=46&t=
 
 ## Updates
 
-Chatbot UI will be updated over time.
-
-Expect frequent improvements.
-
-**Next up:**
-
-- [ ] Sharing
-- [ ] "Bots"
+models list import { OpenAIModels } from '@/types/openai';
 
 ## Deploy
 
