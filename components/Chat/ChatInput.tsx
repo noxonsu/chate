@@ -93,9 +93,9 @@ export const ChatInput = ({
     }
 
     if (!content) {
-      setContent('');
+      //setContent('');
       
-      alert("Вы не ввели сообщение")
+      //alert("Plesae enter a message.")
       return;
     }
 
