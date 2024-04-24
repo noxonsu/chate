@@ -31,8 +31,8 @@ const handler = async (req: Request): Promise<Response> => {
       const { query } = parse(req.url, true);
       let sensorica_client_id = query.sensorica_client_id || 0;
       let post_id = query.post_id || 0;
-      let backsensorica='http://localhost:3009'
-      backsensorica = 'https://telegram.onout.org'
+      let backsensorica='http://localhost:3011'
+      //backsensorica = 'https://telegram.onout.org'
       let url = backsensorica+`/proxyChat?sensorica_client_id=`+sensorica_client_id+`&post_id=`+post_id;
       console.log(url);
       const response = await fetch(url);
