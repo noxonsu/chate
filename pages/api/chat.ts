@@ -44,6 +44,7 @@ const handler = async (req: Request): Promise<Response> => {
       
       if (sensorica_model =='gpt-4-turbo-preview') {
         model = { id: "gpt-4-turbo-preview", name: "GPT-4-turbo", maxLength: 300000, tokenLimit: 122000 }
+        model = { id: "gpt-4o", name: "GPT-4o", maxLength: 300000, tokenLimit: 122000 }
       } else {
         model = { id: "gpt-3.5-turbo-1106", name: "GPT-3.5", maxLength: 16000, tokenLimit: 124000 }
       }
