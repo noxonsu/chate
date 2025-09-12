@@ -14,7 +14,20 @@ export const config = {
   runtime: 'edge',
 };
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+};
+
 const handler = async (req: Request): Promise<Response> => {
+    // Handle preflight requests
+    if (req.method === 'OPTIONS') {
+        return new Response(null, {
+            status: 200,
+            headers: corsHeaders,
+        });
+    }
     let { model, messages, key, prompt, temperature } = (await req.json()) as ChatBody;
     
     
@@ -36,8 +49,22 @@ const handler = async (req: Request): Promise<Response> => {
       let url = backsensorica+`/proxyChat?sensorica_client_id=`+sensorica_client_id+`&post_id=`+post_id;
       console.log(url);
       const response = await fetch(url);
-      /* {"data":{"MAIN_TITLE":"Welcome to WordPress Help Center. Ask me anything!","API_KEY":"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","SYSTEM_PROMPT":"Answer questions about WordPress"},"encrypted":"NacgZhhS1sM9T10IsATS85Du7XMJN+puxYotc5KbN4WVOm2k2UPsCZ6CT1MSbJzrjWDYbTjQ9jt7CQaGrX1FlVShGjwGaRAgUtbgl0ViZAL1AB9veA1TLi4UHmrnY7uqaKvK9ip35ajOorlczulBGtyxS98r6pCwauf/YUtIakdi91q9hf1E35Sghhcs+MbXoAVb3erw+4N2hfaelcj8g9UBmsaByuEPeeRwV4ON4XqDLRBmoanOWS1tBgumI8psnHzSZ1udsEk4xdNfIS1BDOmK9JdBtGMJUwh1ziR8W+/37NBSx9poLWrOuSXSAVb1ohtXwSE21iXBuCL+KBAAE6JHlGYurg4pfHLhyOFuNK354/ODQ6lGBEM3AOY3BRI9kzIzH9pjISFCDHJUiWm8/VXZnuwgb4fnfooiDwupcjQsZasMrHc44ZPB+vZ+QvZnE0hDTDgzdpjf4X/v2G/0q/JtFd7jAJ8I9zvW5dDecxQCoFA8L+7cn/ovb0mng/kx"} */
-      let responsedata = await response.json()
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      /* {"data":{"MAIN_TITLE":"Welcome to WordPress Help Center. Ask me anything!","API_KEY":"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","SYSTEM_PROMPT":"Answer questions about WordPress"},"encrypted":"NacgZhhS1sM9T10IsATS85Du7XMJN+puxYotc5KbN4WVOm2k2UPsCZ6CT1MSbJzrjWDYbTjQ9jt7CQaGrX1FlVShGjwGaRAgUtbgl0ViZAL1AB9veA1TLi4UHmrnY7uqaKvK9ip35ajOorlczulBGtyxS98r6pCwauf/YUtIakdi91q9hf1E35Sghhcs+MbXoAVb3erw+4N2hfaelcj8g9UBmsaByuEPeeRwV4ON4XqDLRBmoanOWS1tBgumI8psnHzSZ1udsEk4xdNfIS1BDOmK9JdBtGMJUwh1ziR8W+/37NBSx9poLWrOuSXSAVb1ohtXwSE21iXBuCL+KBAAE6JHlGYurg4pfHLhyOFuNK354/ODQ6lGBEM3AOY3BRI9kzIzH9pjISFCDHJUiWm8/VXZnuwgb4fnfooiDwupcjQsZasMrHc44ZPB+vZ+QvZnE0hDTDgzdpjf4X/v2G/0q/JtFd7jAJ8I9zvW5dDecxQCoFB8L+7cn/ovb0mng/kx"} */
+      
+      let responsedata;
+      try {
+        responsedata = await response.json();
+      } catch (jsonError) {
+        console.error('JSON parse error:', jsonError);
+        const responseText = await response.text();
+        console.error('Response text:', responseText);
+        throw new Error('Failed to parse response as JSON');
+      }
       key = responsedata.data.API_KEY;
       promptToSend = responsedata.data.SYSTEM_PROMPT;
       let sensorica_model = responsedata.data.sensorica_openai_model;
@@ -57,7 +84,7 @@ const handler = async (req: Request): Promise<Response> => {
         }), {
             status: 502,
             statusText: 'promptToSend.',
-            headers: { 'Content-Type': 'application/json' } // Set the Content-Type header to indicate a JSON response
+            headers: { 'Content-Type': 'application/json', ...corsHeaders }
         });
       }
     } catch (error) {
@@ -66,7 +93,7 @@ const handler = async (req: Request): Promise<Response> => {
       }), {
           status: 501,
           statusText: 'Failed to fetch data from proxyChat endpoint.',
-          headers: { 'Content-Type': 'application/json' } // Set the Content-Type header to indicate a JSON response
+          headers: { 'Content-Type': 'application/json', ...corsHeaders }
       });
     }
 
@@ -96,14 +123,16 @@ const handler = async (req: Request): Promise<Response> => {
     try {
       //console.log("messagesToSend", messagesToSend);
       const stream = await OpenAIStream(model, promptToSend, temperatureToUse, key, messagesToSend);
-      return new Response(stream);
+      return new Response(stream, {
+        headers: corsHeaders
+      });
     } catch (error) {
       return new Response(JSON.stringify({
         message: 'Failed to process the request.',
       }), {
         status: 503,
         statusText: 'Service Unavailable',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json', ...corsHeaders }
       });
     }
     //return new Response(stream);
